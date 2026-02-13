@@ -1,0 +1,36 @@
+messages:
+  title: Title City
+  greeting: Hello
+  loadAircraft: Load Example Aircraft
+  loading: Loading...
+translations:
+  de:
+    title: Titelstadt
+    greeting: Hallo
+    loadAircraft: Beispielflugzeuge laden
+    loading: Wird geladen...
+  fr:
+    title: Ville Titre
+    greeting: Bonjour
+    loadAircraft: Charger des exemples d'avions
+    loading: Chargement...
+  it:
+    title: Città Titolo
+    greeting: Ciao
+    loadAircraft: Carica aeromobili di esempio
+    loading: Caricamento...
+  ko:
+    title: 타이틀 시티
+    greeting: 안녕하세요
+    loadAircraft: 예제 항공기 로드
+    loading: 로딩 중...
+  ru:
+    title: Титульный Город
+    greeting: Здравствуйте
+    loadAircraft: Загрузить примеры самолетов
+    loading: Загрузка...
+  ar:
+    title: مدينة العنوان
+    greeting: مرحبا
+    loadAircraft: تحميل نماذج الطائرات
+    loading: جار التحميل...

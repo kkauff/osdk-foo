@@ -1,0 +1,65 @@
+@use "@blueprintjs/core/lib/scss/variables" as bp;
+
+:root {
+  /* Light mode theme (default) */
+  --accent-color: #{bp.$rose1};
+  --primary-color: #{bp.$dark-gray5};
+  --text-color: #{bp.$dark-gray1};
+  --secondary-text-color: #{bp.$gray1};
+  --disabled-text-color: #{bp.$gray4};
+  --background-color: #{bp.$light-gray4};
+  --panel-background-color: #{bp.$white};
+  --hover-background-color: #{bp.$cerulean4};
+  --button-color: #{bp.$rose1};
+  --button-text-color: #{bp.$white};
+  --border-color: #{bp.$light-gray1};
+  --modal-background-color: #{bp.$white};
+  --modal-overlay-color: rgba(0, 0, 0, 0.5);
+  --error-color: #{bp.$red3};
+  --success-color: #{bp.$green3};
+
+  /* Map tile URL for light mode */
+  --map-tile-url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+}
+
+/* Dark mode theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent-color: #{bp.$rose5};
+    --primary-color: #{bp.$light-gray5};
+    --text-color: #{bp.$white};
+    --secondary-text-color: #{bp.$gray5};
+    --disabled-text-color: #{bp.$gray4};
+    --background-color: #{bp.$dark-gray1};
+    --panel-background-color: #{bp.$dark-gray2};
+    --hover-background-color: #{bp.$cerulean4};
+    --button-color: #{bp.$rose5};
+    --button-text-color: #{bp.$dark-gray1};
+    --border-color: #{bp.$dark-gray1};
+    --modal-background-color: #{bp.$dark-gray1};
+    --modal-overlay-color: rgba(0, 0, 0, 0.7);
+    --error-color: #{bp.$red4};
+    --success-color: #{bp.$green4};
+
+    /* Map tile URL for dark mode */
+    --map-tile-url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  }
+}
+
+/* SCSS variables that reference the CSS variables */
+$accentColor: var(--accent-color);
+$primaryColor: var(--primary-color);
+$textColor: var(--text-color);
+$secondaryTextColor: var(--secondary-text-color);
+$disabledTextColor: var(--disabled-text-color);
+$backgroundColor: var(--background-color);
+$panelBackgroundColor: var(--panel-background-color);
+$hoverBackgroundColor: var(--hover-background-color);
+$buttonColor: var(--button-color);
+$buttonTextColor: var(--button-text-color);
+$borderColor: var(--border-color);
+$modalBackgroundColor: var(--modal-background-color);
+$modalOverlayColor: var(--modal-overlay-color);
+$errorColor: var(--error-color);
+$successColor: var(--success-color);
+$mapTileUrl: var(--map-tile-url);

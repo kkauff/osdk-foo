@@ -1,0 +1,74 @@
+@use "../../_variables.scss" as vars;
+
+.titleBar {
+  background-color: vars.$panelBackgroundColor;
+  color: vars.$accentColor;
+  margin: 0;
+  margin-left: 0;
+  padding: 20px;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+}
+
+.greeting {
+  color: vars.$textColor;
+  margin-bottom: 10px;
+}
+
+.loadButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: vars.$buttonColor;
+  color: vars.$buttonTextColor;
+  font-weight: bold;
+  border: 1px solid vars.$borderColor;
+  border-radius: 4px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.tableContainer {
+  margin-top: 20px;
+  max-height: calc(100vh - 250px);
+  overflow: auto;
+  border: 1px solid vars.$borderColor;
+}
+
+.aircraftTable {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: vars.$backgroundColor;
+    z-index: 1;
+
+    tr {
+      border-bottom: 2px solid vars.$borderColor;
+    }
+  }
+
+  th {
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    color: vars.$accentColor;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid vars.$borderColor;
+  }
+
+  td {
+    padding: 10px;
+    color: vars.$textColor;
+  }
+}
