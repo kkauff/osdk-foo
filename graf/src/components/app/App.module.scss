@@ -1,0 +1,25 @@
+@use "../../_variables.scss" as vars;
+
+.titleBar {
+  background-color: vars.$panelBackgroundColor;
+  color: vars.$accentColor;
+  margin: 0;
+  margin-left: 0;
+  padding: 20px;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+}
+
+.appContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.greeting {
+  color: vars.$textColor;
+  margin-bottom: 20px;
+}

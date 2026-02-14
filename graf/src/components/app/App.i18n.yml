@@ -1,0 +1,36 @@
+messages:
+  title: Graf
+  greeting: Hello
+  selectObjectType: Select Object Type
+  selectObject: Select Object
+translations:
+  de:
+    title: Graf
+    greeting: Hallo
+    selectObjectType: Objekttyp auswählen
+    selectObject: Objekt auswählen
+  fr:
+    title: Graf
+    greeting: Bonjour
+    selectObjectType: Sélectionner le type d'objet
+    selectObject: Sélectionner un objet
+  it:
+    title: Graf
+    greeting: Ciao
+    selectObjectType: Seleziona tipo di oggetto
+    selectObject: Seleziona oggetto
+  ko:
+    title: 그래프
+    greeting: 안녕하세요
+    selectObjectType: 객체 유형 선택
+    selectObject: 객체 선택
+  ru:
+    title: Граф
+    greeting: Здравствуйте
+    selectObjectType: Выберите тип объекта
+    selectObject: Выберите объект
+  ar:
+    title: جراف
+    greeting: مرحبا
+    selectObjectType: حدد نوع الكائن
+    selectObject: حدد الكائن

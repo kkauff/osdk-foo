@@ -1,0 +1,726 @@
+@use "./_variables.scss" as vars;
+@import "@blueprintjs/core/lib/css/blueprint.css";
+
+body {
+  background-color: vars.$backgroundColor;
+  color: vars.$textColor;
+  font-family: "Inconsolata", sans-serif;
+  font-size: 16px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: "Helvetica", sans-serif;
+  font-size: 32px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: vars.$backgroundColor;
+}
+
+.content-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.left-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.right-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Data Filter Styles */
+.data-filter-container {
+  margin: 0 20px 20px 20px;
+  padding: 15px;
+  background-color: vars.$panelBackgroundColor;
+  border-radius: 8px;
+  border: 1px solid vars.$borderColor;
+}
+
+.filter-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+
+  label {
+    font-weight: bold;
+    font-size: 14px;
+    color: vars.$textColor;
+  }
+
+  input,
+  select {
+    font-family: "Inconsolata", sans-serif;
+    font-size: 16px;
+    padding: 8px;
+    background-color: vars.$backgroundColor;
+    color: vars.$textColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+  }
+
+  select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .search-container {
+    display: flex;
+    gap: 8px;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .search-button {
+    background-color: vars.$buttonColor;
+    color: vars.$buttonTextColor;
+    font-weight: bold;
+    border: 1px solid vars.$borderColor;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .loading-indicator {
+    color: vars.$secondaryTextColor;
+    font-style: italic;
+  }
+
+  .error-message {
+    color: vars.$errorColor;
+  }
+}
+
+.filter-item.target-board-selector {
+  flex: 1;
+  min-width: 300px;
+}
+
+.filter-item.gaia-search {
+  flex: 2;
+  min-width: 350px;
+  position: relative;
+
+  .search-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background-color: vars.$panelBackgroundColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .search-dropdown-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid vars.$borderColor;
+    transition: background-color 0.2s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: vars.$hoverBackgroundColor;
+    }
+
+    &.selected {
+      background-color: vars.$hoverBackgroundColor;
+      border-left: 3px solid vars.$accentColor;
+    }
+
+    .map-name {
+      font-weight: bold;
+      color: vars.$textColor;
+      margin-bottom: 4px;
+    }
+
+    .map-metadata {
+      font-size: 12px;
+      color: vars.$secondaryTextColor;
+
+      span {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.filter-item.layer-selector {
+  flex: 0;
+  min-width: 250px;
+  position: relative;
+
+  .custom-dropdown {
+    position: relative;
+    width: 100%;
+  }
+
+  .dropdown-button {
+    width: 100%;
+    padding: 8px 30px 8px 8px;
+    background-color: vars.$backgroundColor;
+    color: vars.$textColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-family: "Inconsolata", sans-serif;
+    font-size: 16px;
+    position: relative;
+
+    &:hover:not(:disabled) {
+      background-color: vars.$hoverBackgroundColor;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .dropdown-arrow {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background-color: vars.$panelBackgroundColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: vars.$hoverBackgroundColor;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+
+    .layer-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .layer-count {
+        font-size: 14px;
+        color: vars.$secondaryTextColor;
+      }
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: vars.$secondaryTextColor;
+}
+
+.error-container {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid vars.$errorColor;
+  border-radius: 4px;
+}
+
+.results-container {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: vars.$backgroundColor;
+  border: 1px solid vars.$borderColor;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: vars.$accentColor;
+  }
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-item {
+  padding: 10px;
+  background-color: vars.$panelBackgroundColor;
+  border: 1px solid vars.$borderColor;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: vars.$hoverBackgroundColor;
+    border-color: vars.$accentColor;
+  }
+
+  &.selected {
+    background-color: vars.$hoverBackgroundColor;
+    border: 2px solid vars.$accentColor;
+  }
+
+  h5 {
+    margin: 0 0 5px 0;
+    color: vars.$accentColor;
+  }
+
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  .result-metadata {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: vars.$secondaryTextColor;
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}
+
+.no-results {
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  color: vars.$disabledTextColor;
+  font-style: italic;
+}
+
+/* Layer Information Styles */
+.layer-info-container {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: vars.$backgroundColor;
+  border: 1px solid vars.$borderColor;
+  border-radius: 4px;
+  max-height: 500px;
+  overflow-y: auto;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: vars.$accentColor;
+  }
+
+  h5 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: vars.$accentColor;
+  }
+}
+
+.layer-details {
+  p {
+    margin: 8px 0;
+    line-height: 1.6;
+  }
+}
+
+.elements-preview {
+  margin-top: 15px;
+}
+
+.element-item {
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: vars.$panelBackgroundColor;
+  border: 1px solid vars.$borderColor;
+  border-radius: 4px;
+
+  p {
+    margin: 6px 0;
+    font-size: 14px;
+  }
+}
+
+.feature-info {
+  margin-top: 10px;
+  padding-left: 15px;
+  border-left: 2px solid vars.$borderColor;
+}
+
+.feature-item {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: vars.$backgroundColor;
+  border-radius: 4px;
+
+  p {
+    margin: 4px 0;
+    font-size: 13px;
+  }
+}
+
+.display-fields {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: vars.$backgroundColor;
+  border-radius: 4px;
+
+  strong {
+    display: block;
+    margin-bottom: 8px;
+    color: vars.$accentColor;
+  }
+
+  pre {
+    margin: 0;
+    padding: 10px;
+    background-color: vars.$panelBackgroundColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+/* Map View Styles */
+.map-view-container {
+  flex: 1;
+  margin: 0 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-map {
+  height: 600px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Override Leaflet controls for light/dark mode */
+.leaflet-control-layers,
+.leaflet-control-zoom {
+  background-color: vars.$panelBackgroundColor !important;
+  color: vars.$textColor !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  color: vars.$primaryColor !important;
+}
+
+/* Selected Data View Styles */
+.selected-data-view {
+  margin: 20px;
+  color: vars.$textColor;
+  position: relative;
+}
+
+.target-details {
+  margin-left: 20px;
+}
+
+.target-placeholder {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: vars.$disabledTextColor;
+}
+
+.target-name {
+  color: vars.$accentColor;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.map-instructions {
+  color: vars.$textColor;
+  text-align: left;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.map-info {
+  text-align: right;
+  margin-top: 10px;
+  font-family: "Inconsolata", sans-serif;
+  font-size: 14px;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: vars.$panelBackgroundColor;
+}
+
+.leaflet-popup-content {
+  font-family: "Inconsolata", sans-serif;
+  font-size: 16px;
+  color: vars.$textColor;
+}
+
+.leaflet-popup-content strong {
+  color: vars.$accentColor;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+}
+
+.leaflet-contextmenu {
+  background-color: vars.$panelBackgroundColor !important;
+  border: 2px solid vars.$borderColor;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.leaflet-contextmenu-item {
+  color: vars.$textColor !important;
+  font-family: "Inconsolata", sans-serif !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  display: block;
+  position: relative;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+
+.leaflet-contextmenu-item:hover::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: vars.$hoverBackgroundColor !important;
+  border-radius: 2px;
+  padding: 12px 16px;
+  z-index: -1;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: vars.$modalOverlayColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-popout {
+  background: vars.$modalBackgroundColor;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 60%;
+  position: relative;
+  z-index: 1100;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.required-fields-note {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.8em;
+  margin-bottom: 20px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 60%;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  label {
+    flex: 0 0 200px;
+    margin-bottom: 0;
+    margin-right: 20px;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  input,
+  select,
+  textarea {
+    flex: 1;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: vars.$panelBackgroundColor;
+    color: vars.$textColor;
+    border: 1px solid vars.$borderColor;
+    border-radius: 4px;
+  }
+}
+
+.submit-button {
+  display: block;
+  margin: 20px auto;
+  background-color: vars.$buttonColor;
+  color: vars.$buttonTextColor;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+.button-container button {
+  width: 150px;
+  margin-right: 10px;
+  background-color: vars.$buttonColor;
+  color: vars.$buttonTextColor;
+  font-weight: bold;
+  border: 1px solid vars.$borderColor;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.button-container .description {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  box-sizing: border-box;
+  color: vars.$textColor;
+}
+
+.error {
+  border: 2px solid vars.$errorColor;
+}
+
+.error-message {
+  color: vars.$errorColor;
+}
+
+.response-panel {
+  flex: 1;
+  padding-left: 70px;
+  word-wrap: break-word;
+}
+
+.response-message {
+  color: vars.$successColor;
+  white-space: pre-wrap;
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
